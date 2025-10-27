@@ -33,9 +33,11 @@ func main() {
 
 func setupRoutes(router *gin.Engine) {
 	aiModelHandler := handlers.NewAiModelHandler()
+	pingHandler := handlers.NewPingHandler()
 
 	api := router.Group("/go-api")
 	{
 		api.GET("/models", aiModelHandler.Index)
+		api.GET("/ping", pingHandler.Index)
 	}
 }
