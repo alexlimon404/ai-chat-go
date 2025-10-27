@@ -4,6 +4,8 @@ sudo -u www-data git pull
 
 echo "build"
 
+go version
+
 go build -buildvcs=false -o ai-chat-go-app .
 
 echo "success"
