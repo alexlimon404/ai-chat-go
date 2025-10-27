@@ -26,7 +26,7 @@ func Connect(dsn string) error {
 
 func Migrate() error {
 	err := DB.AutoMigrate(
-		&models.AiModel{},
+		&models.GoLog{},
 	)
 	if err != nil {
 		return err

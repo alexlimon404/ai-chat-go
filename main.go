@@ -4,6 +4,7 @@ import (
 	"ai-chat-go/config"
 	"ai-chat-go/database"
 	"ai-chat-go/handlers"
+	"ai-chat-go/middleware"
 	"log"
 
 	"github.com/gin-gonic/gin"
@@ -21,7 +22,12 @@ func main() {
 		log.Fatalf("Failed to connect to database: %v", err)
 	}
 
+	if err := database.Migrate(); err != nil {
+		log.Fatalf("Failed to run migrations: %v", err)
+	}
+
 	router := gin.Default()
+	router.Use(middleware.LoggerMiddleware())
 
 	setupRoutes(router)
 
