@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"net/http"
+	"time"
 
 	"github.com/gin-gonic/gin"
 )
@@ -14,8 +15,13 @@ func NewPingHandler() *PingHandler {
 
 // Index GET /go-api/ping
 func (h *PingHandler) Index(c *gin.Context) {
+	startTime := time.Now()
+
+	responseTime := time.Since(startTime).Nanoseconds()
 
 	c.JSON(http.StatusOK, gin.H{
-		"data": `pong`,
+		"data": gin.H{
+			"responseTime": responseTime,
+		},
 	})
 }
